@@ -1,7 +1,9 @@
 from sqlalchemy.orm import Session
 
 from auth.auth import get_password_hash
-from models.user import User
+from models.user import User, Role
+from models.student import Student
+from models.lecturer import Lecturer
 from schemas.user import UserCreate, UserUpdate
 
 
@@ -18,14 +20,28 @@ def get_user_by_email(db: Session, email: str):
 
 
 def create_user(db: Session, user: UserCreate):
-    user.password = get_password_hash(user.password)
-    db_user = User(
-        name=user.name,
-        surname=user.surname,
-        role=user.role,
-        email=user.email,
-        password=user.password,
-    )
+    if user.role == Role.STUDENT:
+        if not user.index:
+            raise ValueError("Student must have an index number")
+        db_user = Student(
+            name=user.name,
+            surname=user.surname,
+            email=user.email,
+            password=get_password_hash(user.password),
+            role=user.role,
+            index=user.index
+        )
+    elif user.role == Role.LECTURER:
+        db_user = Lecturer(
+            name=user.name,
+            surname=user.surname,
+            email=user.email,
+            password=get_password_hash(user.password),
+            role=user.role,
+        )
+    else:
+        raise ValueError("Invalid role provided. Must be 'STUDENT' or 'LECTURER'.")
+
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

@@ -10,10 +10,12 @@ class UserBase(BaseModel):
     surname: str
     role: Role
     email: str
+    index: Optional[int] = None
 
 
 class UserCreate(UserBase):
     password: str
+
 
 
 class UserUpdate(UserBase):
