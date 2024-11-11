@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, ForeignKey, Boolean, Text, String
 from sqlalchemy.orm import relationship
 
 from database.base import Base
+from models.associations import question_result_item_association
 
 
 class QuestionItem(Base):
@@ -17,3 +18,5 @@ class QuestionItem(Base):
 
     # Relationship
     question = relationship("Question", back_populates="question_items")
+
+    question_results = relationship("QuestionResult", secondary=question_result_item_association, back_populates="question_items")

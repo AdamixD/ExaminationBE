@@ -2,6 +2,8 @@ from sqlalchemy import Column, Integer, String, ForeignKey, Float, Text
 from sqlalchemy.orm import relationship
 
 from database.base import Base
+from models.associations import exam_student_question_association
+
 
 class Question(Base):
     __tablename__ = "questions"
@@ -19,4 +21,5 @@ class Question(Base):
     # Relationships
     exam = relationship("Exam", back_populates="questions")
     question_items = relationship("QuestionItem", back_populates="question")
-    question_results = relationship("QuestionResult", back_populates="question")
+
+    exam_students = relationship("ExamStudent", secondary=exam_student_question_association, back_populates="questions")

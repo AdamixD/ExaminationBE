@@ -15,10 +15,9 @@ class Exam(Base):
 
     # ForeignKey to CourseRealization and Lecturer
     course_realization_id = Column(Integer, ForeignKey("course_realizations.id"), nullable=False, index=True)
-    lecturer_id = Column(Integer, ForeignKey("users.id"), index=True)
+
 
     # Relationships
     course_realization = relationship("CourseRealization", back_populates="exams")
-    lecturer = relationship("User", back_populates="lecturer_exams")
     questions = relationship("Question", back_populates="exam")
     exam_students = relationship("ExamStudent", back_populates="exam")
