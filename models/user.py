@@ -21,7 +21,7 @@ class User(Base):
     password = Column(String(255), nullable=False)
 
     # ForeignKey to CourseRealization
-    course_realization_id = Column(Integer, ForeignKey('course_realizations.id'), index=True)
+    course_realization_id = Column(Integer, ForeignKey("course_realizations.id"), index=True)
 
     # Relations
     course_realization = relationship("CourseRealization", back_populates="users")
@@ -30,6 +30,6 @@ class User(Base):
 
     # Polymorphic
     __mapper_args__ = {
-        'polymorphic_identity': 'user',
-        'polymorphic_on': role
+        "polymorphic_identity": "user",
+        "polymorphic_on": "role"
     }

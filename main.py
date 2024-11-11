@@ -4,6 +4,7 @@ from typing import List
 
 from api.auth import router as auth_router
 from api.user import router as user_router
+from api.course import router as course_router
 from database.session import init_db
 
 
@@ -24,7 +25,7 @@ app.add_middleware(
 
 app.include_router(auth_router, prefix="/app")
 app.include_router(user_router, prefix="/app")
-
+app.include_router(course_router, prefix="/app")
 
 @app.on_event("startup")
 async def startup_event():
