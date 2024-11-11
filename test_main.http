@@ -1,0 +1,97 @@
+# Test your FastAPI endpoints
+
+
+### Main endpoint
+GET http://127.0.0.1:8000/app
+Accept: application/json
+
+
+### Create a new user (student)
+POST http://127.0.0.1:8000/app/users/
+Content-Type: application/json
+
+{
+    "name": "Tomasz",
+    "surname": "Złomiarz",
+    "role": "STUDENT",
+    "email": "student@gmail.com",
+    "password": "student"
+}
+
+
+### Create a new user (lecturer)
+POST http://127.0.0.1:8000/app/users/
+Content-Type: application/json
+
+{
+    "name": "Jurek",
+    "surname": "Ogórek",
+    "role": "LECTURER",
+    "email": "lecturer@gmail.com",
+    "password": "lecturer"
+}
+
+
+### Get all users
+GET http://127.0.0.1:8000/app/users/all
+
+
+### Get user
+GET http://127.0.0.1:8000/app/users/1
+
+
+### Get user (with authorization)
+GET http://127.0.0.1:8000/app/users/protected/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsImV4cCI6MTczMTMxODA0MH0.joBN6FDGfc2yvcomOgXBEhQdLBLOuWBxp1Dr0BORNsE
+
+
+### Update user
+PUT http://127.0.0.1:8000/app/users/1
+Content-Type: application/json
+
+{
+    "name": "Tomasz",
+    "surname": "Złomiaż",
+    "role": "STUDENT",
+    "email": "student@gmail.com",
+    "password": "student"
+}
+
+
+### Delete user
+DELETE http://127.0.0.1:8000/app/users/4
+
+
+### Login and get access token (student)
+POST http://127.0.0.1:8000/app/auth/token
+Content-Type: application/x-www-form-urlencoded
+
+username=student@gmail.com&password=student
+
+
+### Login and get access token (lecturer)
+POST http://127.0.0.1:8000/app/auth/token
+Content-Type: application/x-www-form-urlencoded
+
+username=lecturer@gmail.com&password=lecturer
+
+
+### Access protected endpoint
+
+GET http://127.0.0.1:8000/app/auth/protected
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWN0dXJlckBnbWFpbC5jb20iLCJleHAiOjE3MzEyODM3Nzh9.rtE2k3WFQ-950jvN7icj1rcJ1V_zSd_Hw9ntV4DyKH0
+
+
+### Access endpoint for student
+GET http://127.0.0.1:8000/app/auth/student_access
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWN0dXJlckBnbWFpbC5jb20iLCJleHAiOjE3MzEyODM3Nzh9.rtE2k3WFQ-950jvN7icj1rcJ1V_zSd_Hw9ntV4DyKH0
+
+
+### Access endpoint for lecturer
+GET http://127.0.0.1:8000/app/auth/lecturer_access
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWN0dXJlckBnbWFpbC5jb20iLCJleHAiOjE3MzEzMTc2OTB9.d02sNGY4v5z36lHR46zqO7i_VoR9JZjwx907eLVraQU
+
+
+### Access endpoint for student or lecturer
+GET http://127.0.0.1:8000/app/auth/student_or_lecturer_access
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWN0dXJlckBnbWFpbC5jb20iLCJleHAiOjE3MzEyODM5Mjh9.utIrZ5bs-bKcf0_ujm843Pfit3RSJ14JJpKow4t-MMk
