@@ -24,7 +24,6 @@ class UserUpdate(UserBase):
 
 class UserResponse(UserBase):
     id: int
-    course_realization_id: Optional[int]
 
     class Config:
         orm_mode = True
