@@ -5,8 +5,14 @@ from typing import List
 from api.auth import router as auth_router
 from api.user import router as user_router
 from api.course import router as course_router
-from database.session import init_db
+from api.course_realization import router as course_realization_router
+from api.exam import router as exam_router
+from api.question import router as question_router
+from api.question_item import router as question_item_router
+from api.exam_student import router as exam_student_router
+from api.question_result import router as question_result_router
 
+from database.session import init_db
 
 app = FastAPI()
 
@@ -26,6 +32,13 @@ app.add_middleware(
 app.include_router(auth_router, prefix="/app")
 app.include_router(user_router, prefix="/app")
 app.include_router(course_router, prefix="/app")
+app.include_router(course_realization_router, prefix="/app")
+app.include_router(exam_router, prefix="/app")
+app.include_router(question_router, prefix="/app")
+app.include_router(question_item_router, prefix="/app")
+app.include_router(exam_student_router, prefix="/app")
+app.include_router(question_result_router, prefix="/app")
+
 
 @app.on_event("startup")
 async def startup_event():
