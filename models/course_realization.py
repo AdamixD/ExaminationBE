@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 from database.base import Base
 from .associations import student_course_association
 
+
 class CourseRealization(Base):
     __tablename__ = "course_realizations"
 

@@ -14,6 +14,7 @@ Content-Type: application/json
     "name": "Tomasz",
     "surname": "Złomiarz",
     "role": "STUDENT",
+    "index": 310035,
     "email": "student@gmail.com",
     "password": "student"
 }
@@ -95,3 +96,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWN0dXJlc
 ### Access endpoint for student or lecturer
 GET http://127.0.0.1:8000/app/auth/student_or_lecturer_access
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWN0dXJlckBnbWFpbC5jb20iLCJleHAiOjE3MzEyODM5Mjh9.utIrZ5bs-bKcf0_ujm843Pfit3RSJ14JJpKow4t-MMk
+
+
+### Get all course_realizations
+GET http://127.0.0.1:8000/app/course_realizations/all
+
+###
+GET http://127.0.0.1:8000/app/course_realizations/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWN0dXJlckBnbWFpbC5jb20iLCJleHAiOjE3MzI0NjI3MzN9.LXNE0X48V-OTZHzuI_POpn5ycoQOETfwPE8RvkLhORM
+
+###
+GET http://127.0.0.1:8000/app/users/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYWxpbmFAZ21haWwuY29tIiwiZXhwIjoxNzMyNDYyNzk4fQ.8jYIkmSQ4vbtY4q27SJx9i16vJAoJHZyMMD_OFUdVrY

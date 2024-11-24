@@ -3,12 +3,17 @@ from sqlalchemy.orm import Session
 from typing import List
 
 import services.user as service
-from auth.auth import require_role
 
+from auth.auth import get_authorized_user, require_role
 from database.session import get_db
 from schemas.user import UserCreate, UserResponse, UserUpdate
 
 router = APIRouter(prefix="/users", tags=["users"])
+
+
+@router.get("/user", response_model=UserResponse)
+def get_user_auth(user=Depends(get_authorized_user), db: Session = Depends(get_db)):
+    return service.get_user(db=db, user_id=user.id)
 
 
 @router.get("/all", response_model=List[UserResponse])

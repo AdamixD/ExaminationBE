@@ -2,11 +2,27 @@ from sqlalchemy.orm import Session
 from models.course_realization import CourseRealization
 from schemas.course_realization import CourseRealizationCreate, CourseRealizationUpdate
 
+
 def get_all_course_realizations(db: Session):
     return db.query(CourseRealization).all()
 
+
 def get_course_realization(db: Session, course_realization_id: int):
     return db.query(CourseRealization).filter(CourseRealization.id == course_realization_id).first()
+
+
+def get_lecturer_course_realizations(db: Session, lecturer_id: int):
+    return db.query(CourseRealization).filter(CourseRealization.lecturer_id == lecturer_id).all()
+
+
+def get_student_course_realizations(db: Session, student_id: int):
+    return (
+        db.query(CourseRealization)
+        .join(CourseRealization.students)
+        .filter(CourseRealization.students.any(id=student_id))
+        .all()
+    )
+
 
 def create_course_realization(db: Session, course_realization: CourseRealizationCreate):
     db_course_realization = CourseRealization(
@@ -19,6 +35,7 @@ def create_course_realization(db: Session, course_realization: CourseRealization
     db.refresh(db_course_realization)
     return db_course_realization
 
+
 def update_course_realization(db: Session, course_realization_id: int, course_realization: CourseRealizationUpdate):
     db_course_realization = get_course_realization(db, course_realization_id)
     if not db_course_realization:
@@ -28,6 +45,7 @@ def update_course_realization(db: Session, course_realization_id: int, course_re
     db.commit()
     db.refresh(db_course_realization)
     return db_course_realization
+
 
 def delete_course_realization(db: Session, course_realization_id: int):
     db_course_realization = get_course_realization(db, course_realization_id)

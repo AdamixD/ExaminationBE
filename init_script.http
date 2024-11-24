@@ -1,0 +1,164 @@
+### Create new user (student)
+POST http://127.0.0.1:8000/app/users/
+Content-Type: application/json
+
+{
+    "name": "Tomasz",
+    "surname": "Złomiarz",
+    "role": "STUDENT",
+    "index": 310035,
+    "email": "student@gmail.com",
+    "password": "student"
+}
+
+### Create new user (lecturer)
+POST http://127.0.0.1:8000/app/users/
+Content-Type: application/json
+
+{
+    "name": "Jurek",
+    "surname": "Ogórek",
+    "role": "LECTURER",
+    "email": "lecturer@gmail.com",
+    "password": "lecturer"
+}
+
+### Create new user (lecturer)
+POST http://127.0.0.1:8000/app/users/
+Content-Type: application/json
+
+{
+    "name": "Karolina",
+    "surname": "Malina",
+    "role": "LECTURER",
+    "email": "malina@gmail.com",
+    "password": "malina"
+}
+
+
+
+### Create new course
+POST http://127.0.0.1:8000/app/courses/
+Content-Type: application/json
+
+{
+    "title": "Algorytmy i struktury danych",
+    "shortcut": "AISDI"
+}
+
+### Create new course
+POST http://127.0.0.1:8000/app/courses/
+Content-Type: application/json
+
+{
+    "title": "Analiza i projektowanie systemów informacyjnych",
+    "shortcut": "APSI"
+}
+
+### Create new course
+POST http://127.0.0.1:8000/app/courses/
+Content-Type: application/json
+
+{
+    "title": "Bazy danych 2",
+    "shortcut": "BD2"
+}
+
+### Create new course
+POST http://127.0.0.1:8000/app/courses/
+Content-Type: application/json
+
+{
+    "title": "Sieci komputerowe",
+    "shortcut": "SKM"
+}
+
+### Create new course
+POST http://127.0.0.1:8000/app/courses/
+Content-Type: application/json
+
+{
+    "title": "Nanotechnologie",
+    "shortcut": "NAN"
+}
+
+### Create new course
+POST http://127.0.0.1:8000/app/courses/
+Content-Type: application/json
+
+{
+    "title": "Programowanie obiektowe",
+    "shortcut": "PROI"
+}
+
+### Create new course
+POST http://127.0.0.1:8000/app/courses/
+Content-Type: application/json
+
+{
+    "title": "Podstawy automatyki",
+    "shortcut": "PODA"
+}
+
+
+
+### Create new course_realization
+POST http://127.0.0.1:8000/app/course_realizations/
+Content-Type: application/json
+
+{
+    "semester": "24L",
+    "course_id": 3,
+    "lecturer_id": 2
+}
+
+
+### Create new course_realization
+POST http://127.0.0.1:8000/app/course_realizations/
+Content-Type: application/json
+
+{
+    "semester": "24Z",
+    "course_id": 1,
+    "lecturer_id": 2
+}
+
+### Create new course_realization
+POST http://127.0.0.1:8000/app/course_realizations/
+Content-Type: application/json
+
+{
+    "semester": "24Z",
+    "course_id": 2,
+    "lecturer_id": 3
+}
+
+### Create new course_realization
+POST http://127.0.0.1:8000/app/course_realizations/
+Content-Type: application/json
+
+{
+    "semester": "23Z",
+    "course_id": 5,
+    "lecturer_id": 3
+}
+
+### Create new course_realization
+POST http://127.0.0.1:8000/app/course_realizations/
+Content-Type: application/json
+
+{
+    "semester": "23Z",
+    "course_id": 6,
+    "lecturer_id": 3
+}
+
+### Create new course_realization
+POST http://127.0.0.1:8000/app/course_realizations/
+Content-Type: application/json
+
+{
+    "semester": "22Z",
+    "course_id": 7,
+    "lecturer_id": 3
+}

@@ -17,7 +17,6 @@ class UserCreate(UserBase):
     password: str
 
 
-
 class UserUpdate(UserBase):
     password: Optional[str] = None
 
