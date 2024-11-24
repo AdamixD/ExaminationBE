@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 from .course import CourseResponse
+from .user import UserResponse
 
 
 class CourseRealizationBase(BaseModel):
@@ -23,6 +24,7 @@ class CourseRealizationUpdate(CourseRealizationBase):
 class CourseRealizationResponse(CourseRealizationBase):
     id: int
     course: Optional["CourseResponse"]
+    lecturer: Optional["UserResponse"]
 
     class Config:
         orm_mode = True

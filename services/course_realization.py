@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.orm import joinedload
 from models.course_realization import CourseRealization
 from schemas.course_realization import CourseRealizationCreate, CourseRealizationUpdate
 
@@ -8,7 +9,11 @@ def get_all_course_realizations(db: Session):
 
 
 def get_course_realization(db: Session, course_realization_id: int):
-    return db.query(CourseRealization).filter(CourseRealization.id == course_realization_id).first()
+    return db.query(CourseRealization).options(
+        joinedload(CourseRealization.course),
+        joinedload(CourseRealization.lecturer)
+    ).filter(CourseRealization.id == course_realization_id).first()
+
 
 
 def get_lecturer_course_realizations(db: Session, lecturer_id: int):
@@ -50,6 +55,9 @@ def update_course_realization(db: Session, course_realization_id: int, course_re
 def delete_course_realization(db: Session, course_realization_id: int):
     db_course_realization = get_course_realization(db, course_realization_id)
     if db_course_realization:
+        db_course_realization.course  
+        db_course_realization.lecturer  
         db.delete(db_course_realization)
         db.commit()
     return db_course_realization
+

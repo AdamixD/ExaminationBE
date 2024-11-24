@@ -1,6 +1,6 @@
 import enum
 
-from sqlalchemy import Column, Enum, Integer, String, ForeignKey
+from sqlalchemy import Column, Enum, Integer, String
 from sqlalchemy.orm import relationship
 
 from database.base import Base
@@ -25,3 +25,6 @@ class User(Base):
         "polymorphic_identity": "user",
         "polymorphic_on": "role"
     }
+
+    # Relation with CourseRealization for Lecturers
+    course_realizations = relationship("CourseRealization", back_populates="lecturer")
