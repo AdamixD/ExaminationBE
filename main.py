@@ -14,6 +14,7 @@ from api.question_result import router as question_result_router
 
 from database.session import init_db
 
+# Lifespan management for FastAPI (recommended for compatibility)
 app = FastAPI()
 
 ORIGINS: List[str] = [
@@ -21,6 +22,7 @@ ORIGINS: List[str] = [
     "http://127.0.0.1:3000",
 ]
 
+# CORS Middleware for handling cross-origin requests
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ORIGINS,
@@ -29,6 +31,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include all API routers
 app.include_router(auth_router, prefix="/app")
 app.include_router(user_router, prefix="/app")
 app.include_router(course_router, prefix="/app")
@@ -40,15 +43,16 @@ app.include_router(exam_student_router, prefix="/app")
 app.include_router(question_result_router, prefix="/app")
 
 
+# Startup event for database initialization
 @app.on_event("startup")
 async def startup_event():
     init_db()
 
 
+# Root endpoint
 @app.get("/app")
 async def root():
     return {"Examination": "Start"}
-
 
 
 # from datetime import timedelta

@@ -17,7 +17,12 @@ class UserCreate(UserBase):
     password: str
 
 
-class UserUpdate(UserBase):
+class UserUpdate(BaseModel):
+    name: Optional[str] = None
+    surname: Optional[str] = None
+    role: Optional[Role] = None
+    email: Optional[str] = None
+    index: Optional[int] = None
     password: Optional[str] = None
 
 
@@ -25,4 +30,4 @@ class UserResponse(UserBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
