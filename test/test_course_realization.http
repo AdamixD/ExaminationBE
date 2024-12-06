@@ -1,0 +1,29 @@
+### Create new course_realization
+POST http://127.0.0.1:8000/app/course_realizations/
+Content-Type: application/json
+
+{
+    "semester": "24L",
+    "course_id": 1,
+    "lecturer_id": 1
+}
+
+
+### Get all courses realizations
+GET http://127.0.0.1:8000/app/course_realizations/all
+
+### Get course realization
+GET http://127.0.0.1:8000/app/course_realizations/1
+
+### Update course realization
+PUT http://127.0.0.1:8000/app/course_realizations/1
+Content-Type: application/json
+
+{
+    "semester": "24Z",
+    "course_id": 1,
+    "lecturer_id": 1
+}
+
+### Delete course realization
+DELETE http://127.0.0.1:8000/app/course_realizations/1

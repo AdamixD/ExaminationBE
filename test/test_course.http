@@ -1,0 +1,26 @@
+### Create new course
+POST http://127.0.0.1:8000/app/courses/
+Content-Type: application/json
+
+{
+    "title": "Algorytmy i struktury danych",
+    "shortcut": "AISDI"
+}
+
+### Get all courses
+GET http://127.0.0.1:8000/app/courses/all
+
+### Get course
+GET http://127.0.0.1:8000/app/courses/1
+
+### Update course
+PUT http://127.0.0.1:8000/app/courses/1
+Content-Type: application/json
+
+{
+  "title": "Algorytmy i struktury danych 2",
+  "shortcut": "AISDI2"
+}
+
+### Delete course
+DELETE http://127.0.0.1:8000/app/courses/1
