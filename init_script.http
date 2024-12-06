@@ -162,3 +162,27 @@ Content-Type: application/json
     "course_id": 7,
     "lecturer_id": 3
 }
+
+### Create new exam
+POST http://127.0.0.1:8000/app/exams/
+Content-Type: application/json
+
+{
+  "start_date": "2024-12-06T17:00:00.000Z",
+  "end_date": "2024-12-12T17:00:00.000Z",
+  "duration_limit": 30,
+  "status": "status",
+  "course_realization_id": 1
+}
+
+### Create new exam
+POST http://127.0.0.1:8000/app/exams/
+Content-Type: application/json
+
+{
+  "start_date": "2024-12-12T17:00:00.000Z",
+  "end_date": "2024-12-14T17:00:00.000Z",
+  "duration_limit": 60,
+  "status": "status",
+  "course_realization_id": 1
+}

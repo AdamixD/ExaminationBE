@@ -10,7 +10,6 @@ class ExamBase(BaseModel):
     duration_limit: int
     status: str
     course_realization_id: int
-    lecturer_id: int
 
 class ExamCreate(ExamBase):
     pass

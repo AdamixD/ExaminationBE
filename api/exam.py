@@ -13,6 +13,10 @@ router = APIRouter(prefix="/exams", tags=["exams"])
 def get_all_exams(db: Session = Depends(get_db)):
     return service.get_all_exams(db=db)
 
+@router.get("/all/{course_realization_id}", response_model=List[ExamResponse])
+def get_all_course_realization_exams(course_realization_id: int, db: Session = Depends(get_db)):
+    return service.get_all_course_realization_exams(db=db, course_realization_id = course_realization_id)
+
 @router.get("/{exam_id}", response_model=ExamResponse)
 def get_exam(exam_id: int, db: Session = Depends(get_db)):
     exam = service.get_exam(db, exam_id)

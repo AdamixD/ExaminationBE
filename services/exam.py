@@ -5,6 +5,9 @@ from schemas.exam import ExamCreate, ExamUpdate
 def get_all_exams(db: Session):
     return db.query(Exam).all()
 
+def get_all_course_realization_exams(db: Session, course_realization_id: int):
+    return db.query(Exam).filter(Exam.course_realization_id == course_realization_id).all()
+
 def get_exam(db: Session, exam_id: int):
     return db.query(Exam).filter(Exam.id == exam_id).first()
 
