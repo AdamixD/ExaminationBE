@@ -1,7 +1,15 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+import enum
+
+from sqlalchemy import Column, Enum, Integer, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 
 from database.base import Base
+
+
+class ExamStatus(enum.Enum):
+    DEFINED: str = "DEFINED"
+    UNDEFINED: str = "UNDEFINED"
+    CLOSED: str = "CLOSED"
 
 
 class Exam(Base):
@@ -11,7 +19,7 @@ class Exam(Base):
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
     duration_limit = Column(Integer, nullable=False)
-    status = Column(String(255), nullable=False)
+    status = Column(Enum(ExamStatus), nullable=False)
 
     # ForeignKey to CourseRealization and Lecturer
     course_realization_id = Column(Integer, ForeignKey("course_realizations.id"), nullable=False, index=True)

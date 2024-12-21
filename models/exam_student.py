@@ -1,8 +1,17 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float
+import enum
+
+from sqlalchemy import Column, Enum, Integer, ForeignKey, DateTime, Float
 from sqlalchemy.orm import relationship
 
 from database.base import Base
 from models.associations import exam_student_question_association
+
+
+class StudentExamStatus(enum.Enum):
+    ACTIVE: str = "ACTIVE"
+    COMPLETED: str = "COMPLETED"
+    INACTIVE: str = "INACTIVE"
+    CLOSED: str = "CLOSED"
 
 
 class ExamStudent(Base):
@@ -10,7 +19,7 @@ class ExamStudent(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     score = Column(Float)
-    status = Column(String(255), nullable=False)
+    status = Column(Enum(StudentExamStatus), nullable=False)
     start_date = Column(DateTime, nullable=False)
     end_date = Column(DateTime, nullable=False)
     duration = Column(Integer, nullable=False)  # in minutes

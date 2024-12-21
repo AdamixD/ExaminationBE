@@ -6,7 +6,7 @@ Content-Type: application/json
   "start_date": "2024-12-01T17:00:00.000Z",
   "end_date": "2024-12-02T17:00:00.000Z",
   "duration_limit": 30,
-  "status": "test",
+  "status": "UNDEFINED",
   "course_realization_id": 2
 }
 
@@ -24,7 +24,7 @@ Content-Type: application/json
   "start_date": "2024-12-01T17:00:00.000Z",
   "end_date": "2024-12-02T17:00:00.000Z",
   "duration_limit": 30,
-  "status": "test2",
+  "status": "DEFINED",
   "course_realization_id": 2
 }
 
