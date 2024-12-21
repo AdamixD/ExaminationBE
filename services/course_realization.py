@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session, joinedload
 from models.course_realization import CourseRealization
 from schemas.course_realization import CourseRealizationCreate, CourseRealizationUpdate
-from typing import List, Union
+from typing import Union
 
 
 def get_all_course_realizations(db: Session):
@@ -24,27 +24,17 @@ def get_course_realization(db: Session, course_realization_id: int):
     ).filter(CourseRealization.id == course_realization_id).first()
 
 
-def get_authorized_course_realizations(
-    db: Session, user_id: int, role: str
-) -> List[CourseRealization]:
-    """
-    Retrieve course realizations based on user role and ID.
-    - If the role is 'LECTURER', return all courses for the lecturer.
-    - If the role is 'STUDENT', return all courses for the student.
-    """
-    if role == "LECTURER":
-        return db.query(CourseRealization).filter(
-            CourseRealization.lecturer_id == user_id
-        ).all()
-    elif role == "STUDENT":
-        return (
-            db.query(CourseRealization)
-            .join(CourseRealization.students)
-            .filter(CourseRealization.students.any(id=user_id))
-            .all()
-        )
-    else:
-        raise ValueError("Invalid role")
+def get_lecturer_course_realizations(db: Session, lecturer_id: int):
+    return db.query(CourseRealization).filter(CourseRealization.lecturer_id == lecturer_id).all()
+
+
+def get_student_course_realizations(db: Session, student_id: int):
+    return (
+        db.query(CourseRealization)
+        .join(CourseRealization.students)
+        .filter(CourseRealization.students.any(id=student_id))
+        .all()
+    )
 
 
 def create_course_realization(db: Session, course_realization: CourseRealizationCreate):
@@ -64,7 +54,7 @@ def create_course_realization(db: Session, course_realization: CourseRealization
 
 def update_course_realization(
     db: Session, course_realization_id: int, course_realization: CourseRealizationUpdate
-) -> Union[CourseRealization, None]:
+):
     """
     Update an existing course realization.
     """

@@ -2,7 +2,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 
 from database.base import Base
-from models import *
 
 
 DATABASE_URL = "mysql+mysqlconnector://root:password@localhost/examination"
