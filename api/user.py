@@ -11,8 +11,8 @@ from schemas.user import UserCreate, UserResponse, UserUpdate
 router = APIRouter(prefix="/users", tags=["users"])
 
 
-@router.get("/me", response_model=UserResponse)
-def get_current_user(user=Depends(get_authorized_user), db: Session = Depends(get_db)):
+@router.get("/user", response_model=UserResponse)
+def get_user_auth(user=Depends(get_authorized_user), db: Session = Depends(get_db)):
     """
     Fetch the currently authenticated user based on their bearer token.
     """
