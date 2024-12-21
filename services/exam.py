@@ -17,7 +17,10 @@ def create_exam(db: Session, exam: ExamCreate):
         end_date=exam.end_date,
         duration_limit=exam.duration_limit,
         status=exam.status,
-        course_realization_id=exam.course_realization_id
+        course_realization_id=exam.course_realization_id,
+        questions_quantity = exam.questions_quantity,
+        max_points= exam.max_points,
+        type = exam.type,
     )
     db.add(db_exam)
     db.commit()

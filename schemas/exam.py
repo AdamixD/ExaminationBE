@@ -10,6 +10,9 @@ class ExamBase(BaseModel):
     duration_limit: int
     status: str
     course_realization_id: int
+    questions_quantity:int
+    max_points: float
+    type: str
 
 class ExamCreate(ExamBase):
     pass
@@ -19,6 +22,9 @@ class ExamUpdate(ExamBase):
     end_date: Optional[datetime]
     duration_limit: Optional[int]
     status: Optional[str]
+    questions_quantity: Optional[int]
+    max_points: Optional[float]
+    type: Optional[str]
 
 class ExamResponse(ExamBase):
     id: int
