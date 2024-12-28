@@ -3,10 +3,11 @@ POST http://127.0.0.1:8000/app/exams/
 Content-Type: application/json
 
 {
+  "title": "Kolokwium",
   "start_date": "2024-12-01T17:00:00.000Z",
   "end_date": "2024-12-02T17:00:00.000Z",
   "duration_limit": 30,
-  "status": "INACTIVE",
+  "status": "UNDEFINED",
   "course_realization_id": 2,
   "questions_quantity": 0,
   "max_points": 20,
@@ -24,10 +25,11 @@ PUT http://127.0.0.1:8000/app/exams/1
 Content-Type: application/json
 
 {
+  "title": "Sprawdzian",
   "start_date": "2024-12-01T17:00:00.000Z",
   "end_date": "2024-12-02T17:00:00.000Z",
   "duration_limit": 30,
-  "status": "INACTIVE",
+  "status": "UNDEFINED",
   "course_realization_id": 2,
   "questions_quantity": 0,
   "max_points": 20,

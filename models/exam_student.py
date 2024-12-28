@@ -8,9 +8,9 @@ from models.associations import exam_student_question_association
 
 
 class StudentExamStatus(enum.Enum):
+    INACTIVE: str = "INACTIVE"
     ACTIVE: str = "ACTIVE"
     COMPLETED: str = "COMPLETED"
-    INACTIVE: str = "INACTIVE"
     CLOSED: str = "CLOSED"
 
 
@@ -18,11 +18,11 @@ class ExamStudent(Base):
     __tablename__ = "exam_students"
 
     id = Column(Integer, primary_key=True, index=True)
-    score = Column(Float)
+    score = Column(Float, nullable=True)
     status = Column(Enum(StudentExamStatus), nullable=False)
-    start_date = Column(DateTime, nullable=False)
-    end_date = Column(DateTime, nullable=False)
-    duration = Column(Integer, nullable=False)  # in minutes
+    start_date = Column(DateTime, nullable=True)
+    end_date = Column(DateTime, nullable=True)
+    duration = Column(Integer, nullable=True)  # in minutes
 
     # ForeignKeys to Exam and Student
     exam_id = Column(Integer, ForeignKey("exams.id"), nullable=False, index=True)

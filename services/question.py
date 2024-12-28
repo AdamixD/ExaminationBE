@@ -2,11 +2,18 @@ from sqlalchemy.orm import Session
 from models.question import Question
 from schemas.question import QuestionCreate, QuestionUpdate
 
+
 def get_all_questions(db: Session):
     return db.query(Question).all()
 
+
+def get_all_exam_questions(db: Session, exam_id: int):
+    return db.query(Question).filter(Question.exam_id == exam_id).all()
+
+
 def get_question(db: Session, question_id: int):
     return db.query(Question).filter(Question.id == question_id).first()
+
 
 def create_question(db: Session, question: QuestionCreate):
     db_question = Question(
@@ -22,6 +29,7 @@ def create_question(db: Session, question: QuestionCreate):
     db.refresh(db_question)
     return db_question
 
+
 def update_question(db: Session, question_id: int, question: QuestionUpdate):
     db_question = get_question(db, question_id)
     if not db_question:
@@ -31,6 +39,7 @@ def update_question(db: Session, question_id: int, question: QuestionUpdate):
     db.commit()
     db.refresh(db_question)
     return db_question
+
 
 def delete_question(db: Session, question_id: int):
     db_question = get_question(db, question_id)

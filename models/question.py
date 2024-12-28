@@ -1,8 +1,21 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Float, Text
+import enum
+
+from sqlalchemy import Column, Enum, Integer, String, ForeignKey, Float, Text
 from sqlalchemy.orm import relationship
 
 from database.base import Base
 from models.associations import exam_student_question_association
+
+
+class QuestionType(enum.Enum):
+    SINGLE: str = "SINGLE"
+    MULTI: str = "MULTI"
+    OPEN: str = "OPEN"
+
+
+class QuestionScoreType(enum.Enum):
+    PROPORTIONAL: str = "PROPORTIONAL"
+    FULL_CORRECTNESS: str = "FULL_CORRECTNESS"
 
 
 class Question(Base):
@@ -10,10 +23,12 @@ class Question(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     text = Column(Text, nullable=False)
-    image = Column(String(255))  # optional image path or URL
+    image = Column(String(255), nullable=True)  # optional image path or URL
     type = Column(String(255), nullable=False)
+    # type = Column(Enum(QuestionType), nullable=False)
     score = Column(Float, nullable=False)
     score_type = Column(String(255), nullable=False)
+    # score_type = Column(Enum(QuestionScoreType), nullable=False)
 
     # ForeignKey to Exam
     exam_id = Column(Integer, ForeignKey("exams.id"), nullable=False, index=True)

@@ -109,7 +109,7 @@ Content-Type: application/json
 {
     "semester": "24L",
     "course_id": 3,
-    "lecturer_id": 2
+    "lecturer_id": 3
 }
 
 
@@ -163,16 +163,18 @@ Content-Type: application/json
     "lecturer_id": 3
 }
 
+
 ### Create new exam
 POST http://127.0.0.1:8000/app/exams/
 Content-Type: application/json
 
 {
+  "title": "Sprawdzian 1",
   "start_date": "2024-12-06T17:00:00.000Z",
   "end_date": "2024-12-12T17:00:00.000Z",
   "duration_limit": 30,
-  "status": "INACTIVE",
-  "course_realization_id": 1,
+  "status": "SCHEDULED",
+  "course_realization_id": 3,
   "questions_quantity": 0,
   "max_points": 20,
   "type": "TEST"
@@ -183,12 +185,145 @@ POST http://127.0.0.1:8000/app/exams/
 Content-Type: application/json
 
 {
+  "title": "Kolokwium",
   "start_date": "2024-12-12T17:00:00.000Z",
   "end_date": "2024-12-14T17:00:00.000Z",
   "duration_limit": 60,
-  "status": "INACTIVE",
-  "course_realization_id": 1,
+  "status": "CLOSED",
+  "course_realization_id": 3,
   "questions_quantity": 0,
   "max_points": 20,
   "type": "TEST"
 }
+
+### Create new exam
+POST http://127.0.0.1:8000/app/exams/
+Content-Type: application/json
+
+{
+  "title": "Kolokwium - modele",
+  "start_date": "2024-12-22T17:00:00.000Z",
+  "end_date": "2024-12-22T17:00:00.000Z",
+  "duration_limit": 45,
+  "status": "ACTIVE",
+  "course_realization_id": 3,
+  "questions_quantity": 0,
+  "max_points": 20,
+  "type": "TEST"
+}
+
+### Create new exam
+POST http://127.0.0.1:8000/app/exams/
+Content-Type: application/json
+
+{
+  "title": "Projekt",
+  "start_date": "2024-11-11T17:00:00.000Z",
+  "end_date": "2024-12-11T17:00:00.000Z",
+  "duration_limit": 43200,
+  "status": "ACTIVE",
+  "course_realization_id": 3,
+  "max_points": 15,
+  "type": "PROJECT"
+}
+
+### Create new question
+POST http://127.0.0.1:8000/app/questions/
+Content-Type: application/json
+
+{
+  "text": "Zaznacz elementy charakterystyczne dla modelu relacyjnego.",
+  "image": null,
+  "type": "MULTI",
+  "score": 3,
+  "score_type": "PROPORTIONAL",
+  "exam_id": 1
+}
+
+### Create new question
+POST http://127.0.0.1:8000/app/questions/
+Content-Type: application/json
+
+{
+  "text": "Napisz zalety bazy danych Oracle.",
+  "image": null,
+  "type": "OPEN",
+  "score": 5,
+  "score_type": "FULL_CORRECTNESS",
+  "exam_id": 1
+}
+
+### Create new exam student
+POST http://127.0.0.1:8000/app/exam_students/
+Content-Type: application/json
+
+{
+  "score": null,
+  "status": "INACTIVE",
+  "start_date": null,
+  "end_date": null,
+  "duration": null,
+  "exam_id": 1,
+  "student_id": 1
+}
+
+### Create new exam student
+POST http://127.0.0.1:8000/app/exam_students/
+Content-Type: application/json
+
+{
+  "score": null,
+  "status": "INACTIVE",
+  "start_date": null,
+  "end_date": null,
+  "duration": null,
+  "exam_id": 1,
+  "student_id": 1
+}
+
+### Create new exam student
+POST http://127.0.0.1:8000/app/exam_students/
+Content-Type: application/json
+
+{
+  "score": 12.12,
+  "status": "COMPLETED",
+  "start_date": "2024-12-06T17:00:00.000Z",
+  "end_date": "2024-12-12T17:00:00.000Z",
+  "duration": 22,
+  "exam_id": 2,
+  "student_id": 1
+}
+
+### Create new exam student
+POST http://127.0.0.1:8000/app/exam_students/
+Content-Type: application/json
+
+{
+  "score": null,
+  "status": "ACTIVE",
+  "start_date": null,
+  "end_date": null,
+  "duration": null,
+  "exam_id": 3,
+  "student_id": 1
+}
+
+### Create new exam student
+POST http://127.0.0.1:8000/app/exam_students/
+Content-Type: application/json
+
+{
+  "score": null,
+  "status": "ACTIVE",
+  "start_date": null,
+  "end_date": null,
+  "duration": null,
+  "exam_id": 4,
+  "student_id": 1
+}
+
+
+### INSERT INTO `examination`.`students_course_realizations` (`student_id`, `course_realization_id`) VALUES (1, 1);
+### INSERT INTO `examination`.`students_course_realizations` (`student_id`, `course_realization_id`) VALUES (1, 2);
+### INSERT INTO `examination`.`students_course_realizations` (`student_id`, `course_realization_id`) VALUES (1, 3);

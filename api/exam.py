@@ -1,21 +1,41 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 
 import services.exam as service
 
+from auth.auth import get_authorized_user
 from database.session import get_db
+from models.user import Role
 from schemas.exam import ExamCreate, ExamResponse, ExamUpdate
 
 router = APIRouter(prefix="/exams", tags=["exams"])
+
+
+@router.get("/user/{course_realization_id}", response_model=List[ExamResponse])
+def get_user_exams_auth(
+    course_realization_id: int,
+    user=Depends(get_authorized_user),
+    db: Session = Depends(get_db),
+):
+    if user.role == Role.LECTURER:
+        courses = service.get_lecturer_exams(db=db, course_realization_id=course_realization_id)
+    elif user.role == Role.STUDENT:
+        courses = service.get_student_exams(db=db, course_realization_id=course_realization_id, student_id=user.id)
+    else:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Unauthorized role")
+    return courses
+
 
 @router.get("/all", response_model=List[ExamResponse])
 def get_all_exams(db: Session = Depends(get_db)):
     return service.get_all_exams(db=db)
 
+
 @router.get("/all/{course_realization_id}", response_model=List[ExamResponse])
 def get_all_course_realization_exams(course_realization_id: int, db: Session = Depends(get_db)):
-    return service.get_all_course_realization_exams(db=db, course_realization_id = course_realization_id)
+    return service.get_all_course_realization_exams(db=db, course_realization_id=course_realization_id)
+
 
 @router.get("/{exam_id}", response_model=ExamResponse)
 def get_exam(exam_id: int, db: Session = Depends(get_db)):
@@ -24,9 +44,11 @@ def get_exam(exam_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Exam not found")
     return exam
 
+
 @router.post("/", response_model=ExamResponse)
 def create_exam(exam: ExamCreate, db: Session = Depends(get_db)):
     return service.create_exam(db, exam)
+
 
 @router.put("/{exam_id}", response_model=ExamResponse)
 def update_exam(exam_id: int, exam: ExamUpdate, db: Session = Depends(get_db)):
@@ -34,6 +56,7 @@ def update_exam(exam_id: int, exam: ExamUpdate, db: Session = Depends(get_db)):
     if updated_exam is None:
         raise HTTPException(status_code=404, detail="Exam not found")
     return updated_exam
+
 
 @router.delete("/{exam_id}", response_model=ExamResponse)
 def delete_exam(exam_id: int, db: Session = Depends(get_db)):

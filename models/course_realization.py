@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 from database.base import Base
-from .associations import student_course_association
+from .associations import student_course_realization_association
 
 
 class CourseRealization(Base):
@@ -22,8 +22,8 @@ class CourseRealization(Base):
 
     students = relationship(
         "Student",
-        secondary=student_course_association,
-        back_populates="courses",
+        secondary=student_course_realization_association,
+        back_populates="course_realizations",
         lazy="subquery",
         cascade="all"
     )

@@ -9,9 +9,11 @@ from schemas.exam_student import ExamStudentCreate, ExamStudentResponse, ExamStu
 
 router = APIRouter(prefix="/exam_students", tags=["exam_students"])
 
+
 @router.get("/all", response_model=List[ExamStudentResponse])
 def get_all_exam_students(db: Session = Depends(get_db)):
     return service.get_all_exam_students(db=db)
+
 
 @router.get("/{exam_student_id}", response_model=ExamStudentResponse)
 def get_exam_student(exam_student_id: int, db: Session = Depends(get_db)):
@@ -20,9 +22,11 @@ def get_exam_student(exam_student_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Exam Student not found")
     return exam_student
 
+
 @router.post("/", response_model=ExamStudentResponse)
 def create_exam_student(exam_student: ExamStudentCreate, db: Session = Depends(get_db)):
     return service.create_exam_student(db, exam_student)
+
 
 @router.put("/{exam_student_id}", response_model=ExamStudentResponse)
 def update_exam_student(exam_student_id: int, exam_student: ExamStudentUpdate, db: Session = Depends(get_db)):
@@ -30,6 +34,7 @@ def update_exam_student(exam_student_id: int, exam_student: ExamStudentUpdate, d
     if updated_exam_student is None:
         raise HTTPException(status_code=404, detail="Exam Student not found")
     return updated_exam_student
+
 
 @router.delete("/{exam_student_id}", response_model=ExamStudentResponse)
 def delete_exam_student(exam_student_id: int, db: Session = Depends(get_db)):

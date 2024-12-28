@@ -1,5 +1,6 @@
 from .user import UserResponse
 
+
 class StudentResponse(UserResponse):
     index: int
 

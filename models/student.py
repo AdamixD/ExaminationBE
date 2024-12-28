@@ -1,8 +1,9 @@
 from sqlalchemy import Column, Integer
 from sqlalchemy.orm import relationship
 
-from models.associations import student_course_association
+from models.associations import student_course_realization_association
 from models.user import User, Role
+
 
 class Student(User):
     """
@@ -16,9 +17,9 @@ class Student(User):
     }
 
     # Relationship with course realizations through the association table
-    courses = relationship(
+    course_realizations = relationship(
         "CourseRealization",
-        secondary=student_course_association,
+        secondary=student_course_realization_association,
         back_populates="students"
     )
 
