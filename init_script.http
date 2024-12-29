@@ -249,8 +249,41 @@ Content-Type: application/json
   "image": null,
   "type": "OPEN",
   "score": 5,
-  "score_type": "FULL_CORRECTNESS",
+  "score_type": "FULL",
   "exam_id": 1
+}
+
+### Create new question item
+POST http://127.0.0.1:8000/app/question_items/
+Content-Type: application/json
+
+{
+  "text": "Relacja",
+  "image": null,
+  "correctness": true,
+  "question_id": 1
+}
+
+### Create new question item
+POST http://127.0.0.1:8000/app/question_items/
+Content-Type: application/json
+
+{
+  "text": "Encja",
+  "image": null,
+  "correctness": false,
+  "question_id": 1
+}
+
+### Create new question item
+POST http://127.0.0.1:8000/app/question_items/
+Content-Type: application/json
+
+{
+  "text": "Tabela",
+  "image": null,
+  "correctness": true,
+  "question_id": 1
 }
 
 ### Create new exam student

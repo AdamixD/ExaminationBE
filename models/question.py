@@ -15,7 +15,7 @@ class QuestionType(enum.Enum):
 
 class QuestionScoreType(enum.Enum):
     PROPORTIONAL: str = "PROPORTIONAL"
-    FULL_CORRECTNESS: str = "FULL_CORRECTNESS"
+    FULL: str = "FULL"
 
 
 class Question(Base):
@@ -35,6 +35,6 @@ class Question(Base):
 
     # Relationships
     exam = relationship("Exam", back_populates="questions")
-    question_items = relationship("QuestionItem", back_populates="question")
+    question_items = relationship("QuestionItem", back_populates="question", cascade='all, delete, delete-orphan')
 
     exam_students = relationship("ExamStudent", secondary=exam_student_question_association, back_populates="questions")

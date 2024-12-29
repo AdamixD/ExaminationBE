@@ -28,7 +28,7 @@ class QuestionUpdate(QuestionBase):
 
 class QuestionResponse(QuestionBase):
     id: int
-    # question_items: List["QuestionItemResponse"]
+    question_items: List["QuestionItemResponse"]
     # question_results: List["QuestionResultResponse"]
 
     class Config:
