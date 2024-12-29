@@ -8,7 +8,7 @@ from database.base import Base
 
 class ExamStatus(enum.Enum):
     UNDEFINED: str = "UNDEFINED"
-    SCHEDULED: str = "SCHEDULED"
+    ASSIGNED: str = "ASSIGNED"
     ACTIVE: str = "ACTIVE"
     CLOSED: str = "CLOSED"
 
@@ -36,5 +36,5 @@ class Exam(Base):
 
     # Relationships
     course_realization = relationship("CourseRealization", back_populates="exams")
-    questions = relationship("Question", back_populates="exam")
-    exam_students = relationship("ExamStudent", back_populates="exam")
+    questions = relationship("Question", back_populates="exam", cascade='all, delete, delete-orphan')
+    exam_students = relationship("ExamStudent", back_populates="exam", cascade='all, delete, delete-orphan')
