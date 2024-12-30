@@ -38,3 +38,6 @@ Content-Type: application/json
 
 ### Delete exam
 DELETE http://127.0.0.1:8000/app/exams/1
+
+### Assign exam
+DELETE http://127.0.0.1:8000/app/exams/assign/1

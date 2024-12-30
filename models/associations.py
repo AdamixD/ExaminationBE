@@ -9,7 +9,7 @@ student_course_realization_association = Table(
 )
 
 exam_student_question_association = Table(
-    'exams_student_questions', Base.metadata,
+    'exam_students_questions', Base.metadata,
     Column('exam_student_id', Integer, ForeignKey('exam_students.id'), primary_key=True, index=True),
     Column('question_id', Integer, ForeignKey('questions.id'), primary_key=True, index=True)
 )

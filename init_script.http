@@ -35,6 +35,18 @@ Content-Type: application/json
     "password": "malina"
 }
 
+### Create new user (student)
+POST http://127.0.0.1:8000/app/users/
+Content-Type: application/json
+
+{
+    "name": "Zenek",
+    "surname": "Błazenek",
+    "role": "STUDENT",
+    "index": 310333,
+    "email": "blazenek@gmail.com",
+    "password": "blazenek"
+}
 
 
 ### Create new course
@@ -112,7 +124,6 @@ Content-Type: application/json
     "lecturer_id": 3
 }
 
-
 ### Create new course_realization
 POST http://127.0.0.1:8000/app/course_realizations/
 Content-Type: application/json
@@ -164,6 +175,7 @@ Content-Type: application/json
 }
 
 
+
 ### Create new exam
 POST http://127.0.0.1:8000/app/exams/
 Content-Type: application/json
@@ -173,9 +185,9 @@ Content-Type: application/json
   "start_date": "2024-12-06T17:00:00.000Z",
   "end_date": "2024-12-12T17:00:00.000Z",
   "duration_limit": 30,
-  "status": "SCHEDULED",
+  "status": "UNDEFINED",
   "course_realization_id": 3,
-  "questions_quantity": 0,
+  "questions_quantity": 4,
   "max_points": 20,
   "type": "TEST"
 }
@@ -191,7 +203,7 @@ Content-Type: application/json
   "duration_limit": 60,
   "status": "CLOSED",
   "course_realization_id": 3,
-  "questions_quantity": 0,
+  "questions_quantity": 10,
   "max_points": 20,
   "type": "TEST"
 }
@@ -207,7 +219,7 @@ Content-Type: application/json
   "duration_limit": 45,
   "status": "ACTIVE",
   "course_realization_id": 3,
-  "questions_quantity": 0,
+  "questions_quantity": 5,
   "max_points": 20,
   "type": "TEST"
 }
@@ -223,6 +235,7 @@ Content-Type: application/json
   "duration_limit": 43200,
   "status": "ACTIVE",
   "course_realization_id": 3,
+  "questions_quantity": 2,
   "max_points": 15,
   "type": "PROJECT"
 }
@@ -286,19 +299,7 @@ Content-Type: application/json
   "question_id": 1
 }
 
-### Create new exam student
-POST http://127.0.0.1:8000/app/exam_students/
-Content-Type: application/json
 
-{
-  "score": null,
-  "status": "INACTIVE",
-  "start_date": null,
-  "end_date": null,
-  "duration": null,
-  "exam_id": 1,
-  "student_id": 1
-}
 
 ### Create new exam student
 POST http://127.0.0.1:8000/app/exam_students/
@@ -306,7 +307,7 @@ Content-Type: application/json
 
 {
   "score": null,
-  "status": "INACTIVE",
+  "status": "SCHEDULED",
   "start_date": null,
   "end_date": null,
   "duration": null,
@@ -333,13 +334,13 @@ POST http://127.0.0.1:8000/app/exam_students/
 Content-Type: application/json
 
 {
-  "score": null,
-  "status": "ACTIVE",
-  "start_date": null,
-  "end_date": null,
-  "duration": null,
-  "exam_id": 3,
-  "student_id": 1
+  "score": 11.60,
+  "status": "COMPLETED",
+  "start_date": "2024-12-06T17:00:00.000Z",
+  "end_date": "2024-12-12T17:35:00.000Z",
+  "duration": 35,
+  "exam_id": 2,
+  "student_id": 4
 }
 
 ### Create new exam student
@@ -352,11 +353,6 @@ Content-Type: application/json
   "start_date": null,
   "end_date": null,
   "duration": null,
-  "exam_id": 4,
+  "exam_id": 3,
   "student_id": 1
 }
-
-
-### INSERT INTO `examination`.`students_course_realizations` (`student_id`, `course_realization_id`) VALUES (1, 1);
-### INSERT INTO `examination`.`students_course_realizations` (`student_id`, `course_realization_id`) VALUES (1, 2);
-### INSERT INTO `examination`.`students_course_realizations` (`student_id`, `course_realization_id`) VALUES (1, 3);

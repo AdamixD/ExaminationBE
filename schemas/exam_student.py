@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import List, Optional
 
+from .question import QuestionResponse
 from .question_result import QuestionResultResponse
 
 
@@ -27,7 +28,8 @@ class ExamStudentUpdate(ExamStudentBase):
 
 class ExamStudentResponse(ExamStudentBase):
     id: int
-    # question_results: List["QuestionResultResponse"]
+    questions: List["QuestionResponse"]
+    question_results: List["QuestionResultResponse"]
 
     class Config:
         orm_mode = True

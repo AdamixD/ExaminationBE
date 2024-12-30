@@ -34,7 +34,7 @@ class ExamUpdate(ExamBase):
 
 class ExamResponse(ExamBase):
     id: int
-    # questions: List["QuestionResponse"]
+    questions: List["QuestionResponse"]
 
     class Config:
         orm_mode = True

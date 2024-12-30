@@ -64,3 +64,12 @@ def delete_exam(exam_id: int, db: Session = Depends(get_db)):
     if deleted_exam is None:
         raise HTTPException(status_code=404, detail="Exam not found")
     return deleted_exam
+
+
+@router.post("/assign/{exam_id}", response_model=ExamResponse)
+def assign_exam_to_students(exam_id: int, db: Session = Depends(get_db)):
+    try:
+        db_exam = service.assign_exam(db, exam_id)
+        return db_exam
+    except HTTPException as e:
+        raise HTTPException(status_code=e.status_code, detail=e.detail)

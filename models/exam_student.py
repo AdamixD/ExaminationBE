@@ -8,7 +8,7 @@ from models.associations import exam_student_question_association
 
 
 class StudentExamStatus(enum.Enum):
-    INACTIVE: str = "INACTIVE"
+    SCHEDULED: str = "SCHEDULED"
     ACTIVE: str = "ACTIVE"
     COMPLETED: str = "COMPLETED"
     CLOSED: str = "CLOSED"
