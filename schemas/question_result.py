@@ -7,7 +7,7 @@ class QuestionResultBase(BaseModel):
     comment: Optional[str]
     answer: Optional[str]
     exam_student_id: int
-    question_id: int
+    # question_id: int
 
 
 class QuestionResultCreate(QuestionResultBase):
