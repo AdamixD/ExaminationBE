@@ -8,6 +8,9 @@ def get_all_exam_students(db: Session):
 def get_exam_student(db: Session, exam_student_id: int):
     return db.query(ExamStudent).filter(ExamStudent.id == exam_student_id).first()
 
+def get_all_exam_students_exam(db: Session, exam_id: int):
+    return db.query(ExamStudent).filter(ExamStudent.exam_id == exam_id)
+
 def create_exam_student(db: Session, exam_student: ExamStudentCreate):
     db_exam_student = ExamStudent(
         score=exam_student.score,

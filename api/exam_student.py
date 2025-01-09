@@ -5,7 +5,7 @@ from typing import List
 import services.exam_student as service
 
 from database.session import get_db
-from schemas.exam_student import ExamStudentCreate, ExamStudentResponse, ExamStudentUpdate
+from schemas.exam_student import ExamStudentCreate, ExamStudentResponse, ExamStudentUpdate, ExamStudentExamResponse
 
 router = APIRouter(prefix="/exam_students", tags=["exam_students"])
 
@@ -22,6 +22,9 @@ def get_exam_student(exam_student_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Exam Student not found")
     return exam_student
 
+@router.get("/exam/all/{exam_id}", response_model=List[ExamStudentExamResponse])
+def get_all_exam_students_exam(exam_id: int, db: Session = Depends(get_db)):
+    return service.get_all_exam_students_exam(db, exam_id)
 
 @router.post("/", response_model=ExamStudentResponse)
 def create_exam_student(exam_student: ExamStudentCreate, db: Session = Depends(get_db)):
