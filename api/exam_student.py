@@ -22,6 +22,7 @@ def get_exam_student(exam_student_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Exam Student not found")
     return exam_student
 
+
 @router.get("/exam/all/{exam_id}", response_model=List[ExamStudentExamResponse])
 def get_all_exam_students_exam(exam_id: int, db: Session = Depends(get_db)):
     return service.get_all_exam_students_exam(db, exam_id)
@@ -29,10 +30,11 @@ def get_all_exam_students_exam(exam_id: int, db: Session = Depends(get_db)):
 
 @router.get("/ids/{exam_id}/{student_id}", response_model=ExamStudentExamResponse)
 def get_exam_student(exam_id: int, student_id: int, db: Session = Depends(get_db)):
-    exam_student = service.get_exam_student_by_ids(db, 5, student_id)
+    exam_student = service.get_exam_student_by_ids(db, exam_id, student_id)
     if exam_student is None:
         raise HTTPException(status_code=404, detail="Exam Student not found")
     return exam_student
+
 
 @router.post("/", response_model=ExamStudentResponse)
 def create_exam_student(exam_student: ExamStudentCreate, db: Session = Depends(get_db)):
