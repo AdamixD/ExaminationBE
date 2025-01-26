@@ -126,3 +126,20 @@ def assign_exam(db: Session, exam_id: int):
     db.commit()
 
     return db_exam
+
+
+def unassign_exam(db: Session, exam_id: int):
+    db_exam = db.query(Exam).filter(Exam.id == exam_id).first()
+
+    if db_exam is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Exam not found")
+
+    # Remove all associated ExamStudent records
+    associated_exam_students = db.query(ExamStudent).filter(ExamStudent.exam_id == exam_id).all()
+    for exam_student in associated_exam_students:
+        db.delete(exam_student)
+
+    db_exam.status = "UNDEFINED"
+    db.commit()
+
+    return db_exam

@@ -73,3 +73,11 @@ def assign_exam_to_students(exam_id: int, db: Session = Depends(get_db)):
         return db_exam
     except HTTPException as e:
         raise HTTPException(status_code=e.status_code, detail=e.detail)
+
+@router.post("/unassign/{exam_id}", response_model=ExamResponse)
+def unassign_exam_from_students(exam_id: int, db: Session = Depends(get_db)):
+    try:
+        db_exam = service.unassign_exam(db, exam_id)
+        return db_exam
+    except HTTPException as e:
+        raise HTTPException(status_code=e.status_code, detail=e.detail)
