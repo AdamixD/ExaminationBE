@@ -15,26 +15,29 @@ class ExamBase(BaseModel):
     questions_quantity: Optional[int] = None
     max_points: float
     type: str
+    grading_method: Optional[str] = None  # New field for grading method
 
 
 class ExamCreate(ExamBase):
     pass
 
 
-class ExamUpdate(ExamBase):
-    title: str
-    start_date: Optional[datetime]
-    end_date: Optional[datetime]
-    duration_limit: Optional[int]
-    status: Optional[str]
-    questions_quantity: Optional[int]
-    max_points: Optional[float]
-    type: Optional[str]
+class ExamUpdate(BaseModel):
+    title: Optional[str] = None
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+    duration_limit: Optional[int] = None
+    status: Optional[str] = None
+    course_realization_id: Optional[int] = None
+    questions_quantity: Optional[int] = None
+    max_points: Optional[float] = None
+    type: Optional[str] = None
+    grading_method: Optional[str] = None  # Field for grading method
 
 
 class ExamResponse(ExamBase):
     id: int
-    questions: List["QuestionResponse"]
+    questions: List[QuestionResponse]
 
     class Config:
         orm_mode = True

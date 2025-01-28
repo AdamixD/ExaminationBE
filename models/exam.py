@@ -18,6 +18,11 @@ class ExamType(enum.Enum):
     PROJECT: str = "PROJECT"
 
 
+class GradingMethod(enum.Enum):
+    NEGATIVE_MARKING = "negative_marking"
+    FULL_MARKING = "full_marking"
+
+
 class Exam(Base):
     __tablename__ = "exams"
 
@@ -30,6 +35,7 @@ class Exam(Base):
     questions_quantity = Column(Integer, nullable=True)
     max_points = Column(Float, nullable=False)
     type = Column(Enum(ExamType), nullable=False)
+    grading_method = Column(Enum(GradingMethod), nullable=True)  # New field for grading method
 
     # ForeignKey to CourseRealization and Lecturer
     course_realization_id = Column(Integer, ForeignKey("course_realizations.id"), nullable=False, index=True)

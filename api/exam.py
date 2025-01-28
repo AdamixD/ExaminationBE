@@ -73,3 +73,14 @@ def assign_exam_to_students(exam_id: int, db: Session = Depends(get_db)):
         return db_exam
     except HTTPException as e:
         raise HTTPException(status_code=e.status_code, detail=e.detail)
+
+
+@router.post("/{exam_id}/grading_method", response_model=ExamResponse)
+def set_grading_method(exam_id: int, grading_method: str, db: Session = Depends(get_db)):
+    """
+    Endpoint to set the grading method for a specific exam.
+    """
+    try:
+        return service.set_grading_method(db, exam_id, grading_method)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
