@@ -9,9 +9,6 @@ from database.grading import grade_exam
 from database.session import DATABASE_URL
 
 
-
-
-
 def update_exam_status():
     engine = create_engine(DATABASE_URL)
     Session = sessionmaker(bind=engine)
